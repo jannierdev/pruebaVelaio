@@ -1,0 +1,64 @@
+[
+    {
+        "id": 1,
+        "nombreTarea": "Desarrollar aplicativo web con angular",
+        "estado": false,
+        "personas": [
+            {
+                "nombreCompleto": "Pepito perez",
+                "edad": 22,
+                "habilidades": [
+                    {
+                        "nombreHabilidad": "Desarrollador"
+                    },
+                    {
+                        "nombreHabilidad": "Cloud"
+                    }
+                ]
+            },
+            {
+                "nombreCompleto": "Maria Teresa",
+                "edad": 18,
+                "habilidades": [
+                    {
+                        "nombreHabilidad": "Diseñadora"
+                    }
+                ]
+            },
+            {
+                "nombreCompleto": "Maria Teresa Yaaaa",
+                "edad": 18,
+                "habilidades": [
+                    {
+                        "nombreHabilidad": "Diseñadoraaaaaaaaaa"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "nombreTarea": "Publicar aplicativo web",
+        "estado": false,
+        "personas": [
+            {
+                "nombreCompleto": "Juan acosta",
+                "edad": 44,
+                "habilidades": [
+                    {
+                        "nombreHabilidad": "Cloud"
+                    }
+                ]
+            },
+            {
+                "nombreCompleto": "Jose zapata",
+                "edad": 33,
+                "habilidades": [
+                    {
+                        "nombreHabilidad": "QA testing"
+                    }
+                ]
+            }
+        ]
+    }
+]

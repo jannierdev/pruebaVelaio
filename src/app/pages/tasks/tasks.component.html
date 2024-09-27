@@ -1,0 +1,126 @@
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h5>Tareas</h5>
+                <button class="btn btn-primary" (click)="open(content, 'xl', false);">Crear tarea</button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Filtrar tareas por estado:</label>
+                            <select class="form-control" (change)="filtrarTareas()" [(ngModel)]="filtro">
+                                <option value="0">Todos</option>
+                                <option value="1">En proceso</option>
+                                <option value="2">Finalizados</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <app-table [dataColumns]="dataColumns" [dataRows]="dataRows" [buttonsTable]="buttonsTable"></app-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h5>Crear tarea</h5>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Titulo de la tarea</label>
+                        <input type="text" class="form-control" formControlName="nombreTarea">
+                        <span class="text-danger" *ngIf="form.controls['nombreTarea'].errors?.['required']">
+                            El nombre de la tareas es obligatorio
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12 d-flex justify-content-between">
+                    <h5>Personas</h5>
+                    <button class="btn btn-primary" (click)="agregarPersona()">Nueva persona</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <ng-container formArrayName="personas">
+                        <ng-container *ngFor="let persona of getPersonas(form); let i = index">
+                            <div [formGroupName]="i">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Nombre completo</label>
+                                            <input type="text" class="form-control" formControlName="nombreCompleto">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Edad</label>
+                                            <input type="number" class="form-control" formControlName="edad">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mt-4">
+                                        <div class="form-group">
+                                            <button class="btn btn-danger" (click)="borrarPersona(i)">Eliminar</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 d-flex justify-content-between">
+                                        <h5>Habilidades</h5>
+                                        <a class="text-primary ml-2" (click)="agregarHabilidad(i)">Agregar
+                                            Habilidad</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ng-container formArrayName="habilidades">
+                                            <ng-container *ngFor="let habilidad of habilidades(persona); let j = index"
+                                                [formGroupName]="j">
+                                                <div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <input type="text" formControlName="nombreHabilidad"
+                                                                    placeholder="Nombre de la habilidad"
+                                                                    class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <button class="btn btn-danger"
+                                                                    (click)="borrarHabilidad(i, j)">Eliminar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="ml-auto mr-auto">
+                    <button type="button" class="btn btn-success btn-round" (click)="onSubmit()"
+                        [disabled]="!form.valid">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

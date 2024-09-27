@@ -1,0 +1,32 @@
+<table class="table">
+    <thead class="text-success" style="color: black !important;">
+        <th class="text-center" *ngIf="buttonsTable.length">
+            Acción
+        </th>
+        <th *ngFor="let column of tableColumns let colIndex = index;" class="{{column.style}}">
+            {{column.header}}
+        </th>
+    </thead>
+    <tbody>
+    <tbody>
+        <tr *ngFor="let data of tableRows">
+            <td class="text-center" *ngIf="buttonsTable.length">
+                <ng-container *ngFor="let button of buttonsTable">
+                    <ng-container>
+                        <button class="{{button.classButton}}" (click)="button.action(data)">
+                            {{button.text}}
+                        </button>
+                    </ng-container>
+                </ng-container>
+            </td>
+            <td *ngFor="let column of tableColumns" class="{{column.style}}">
+                <ng-container>
+                    <div class="background {{column.setBackground(data)}}" *ngIf="column.type === 'estado'">
+                        {{data[column.columnDef] === false ? 'En proceso' : 'Finalizado' }}</div>
+
+                    <div *ngIf="column.type === 'text'">
+                        {{data[column.columnDef]}}</div>
+                </ng-container>
+            </td>
+    </tbody>
+</table>
